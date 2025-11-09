@@ -1,7 +1,11 @@
+import { use } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 const Login = () => {
+  const {user}=use(AuthContext)
+  console.log(user)
   const hangleLogIn = (e) => {
     e.preventDefault();
   };

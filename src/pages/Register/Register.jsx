@@ -1,10 +1,42 @@
-import { Link } from "react-router";
+import { use } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
-
+  const { createUser, setUser, updatedUserSet } = use(AuthContext);
+  // const location = useLocation();
+  const nevigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log("data in res form", { name, email, photo, password });
 
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        // console.log(user);
+        updatedUserSet({
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            nevigate("/auth-layout");
+          })
+          .catch((error) => {
+            toast(error.message);
+            // console.log(error.message);
+          });
+        toast.success("Register Successfully ✅");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -58,7 +90,7 @@ const Register = () => {
           <div className="text-accent text-center">
             Have an account ?{" "}
             <span>
-              <Link to={'/auth-layout'} className="text-green-500">
+              <Link to={"/auth-layout"} className="text-green-500">
                 Log In
               </Link>
             </span>
