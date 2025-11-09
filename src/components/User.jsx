@@ -18,10 +18,13 @@ const User = () => {
         toast.error(error.massage);
       });
   };
-//   ==== user Link ===
+  //   ==== user Link ====
   const Links = (
     <>
-      <Link className="btn btn-outline border border-primary hover:btn-primary hover:text-white">
+      <Link
+        to={"/profile"}
+        className="btn btn-outline border border-primary hover:btn-primary hover:text-white"
+      >
         Profile
       </Link>
       <Link

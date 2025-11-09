@@ -7,7 +7,7 @@ const PrivetRoutes = ({ children }) => {
   // console.log(user);
   const location = useLocation();
   if (loading) {
-    return <>Loading ....</>;
+    return <p className="text-center py-20">Loading ...</p>;
   }
   if (user && user?.email) {
     return children;
