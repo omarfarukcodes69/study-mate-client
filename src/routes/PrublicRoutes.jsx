@@ -9,7 +9,7 @@ import Register from "../pages/Register/Register";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <RootLayout/>,
     children: [
       {
         index: true,
