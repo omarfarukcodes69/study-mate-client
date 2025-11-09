@@ -1,13 +1,30 @@
 import { use } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const {user}=use(AuthContext)
-  console.log(user)
+  const { user, logInUser } = use(AuthContext);
+  // console.log(user)
+  const nevigate =useNavigate()
   const hangleLogIn = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+    logInUser(email, password)
+    .then((UserContainer) => {
+        const user = UserContainer.user;
+        nevigate(`${location.state ? location.state : "/"}`);
+        // console.log(user);
+        toast(`Log In Successfully !!! ${user?.displayName}`);
+      })
+      .catch((error) => {
+        // console.log(error.massage);
+        toast(error.code, error.message);
+      });
   };
   const handleGoogleLogIn = () => {};
   return (

@@ -9,6 +9,7 @@ import {FaArrowAltCircleRight } from "react-icons/fa";
 const Home = () => {
   return (
     <div>
+
       <header>
         <HeroBanner />
       </header>

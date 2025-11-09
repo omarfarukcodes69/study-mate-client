@@ -1,12 +1,11 @@
-import React from "react";
+import React, { use } from "react";
 import Logo from "../assets/justlogo.png";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../context/AuthContext/AuthContext";
+import User from "./User";
 
 const Navbar = () => {
-  const user = {
-    name: "omar",
-    email: "hdfjhf",
-  };
+  const { user } = use(AuthContext);
   // ===my Navlinks ===
   const Links = (
     <>
@@ -86,19 +85,24 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="btn btn-ghost text-xl">
-            <img className=" w-10 h-10" src={Logo} alt="" />
-            <h1>
-              <span className=" text-primary">Study</span> <span className="text-primary font-normal">Mate</span>
-            </h1>
-            </div>
+          <img className=" w-10 h-10" src={Logo} alt="" />
+          <h1>
+            <span className=" text-primary">Study</span>{" "}
+            <span className="text-primary font-normal">Mate</span>
+          </h1>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {Links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={'/auth-layout'} className="btn btn-primary">Login</Link>
+        {user ? (
+          <User />
+        ) : (
+          <Link to={"/auth-layout"} className="btn btn-primary">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

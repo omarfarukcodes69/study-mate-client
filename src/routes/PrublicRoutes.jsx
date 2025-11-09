@@ -5,11 +5,13 @@ import FindParters from "../pages/FindPartners/FindParters";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivetRoutes from "./PrivetRoutes";
+import CreateProfile from "../pages/CreateProfile/CreateProfile";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout/>,
+    element: <RootLayout />,
     children: [
       {
         index: true,
@@ -18,15 +20,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/find-partners",
-        element: <FindParters/>,
+        element: <FindParters />,
+      },
+      {
+        path: "/create-profile",
+        element: (
+          <PrivetRoutes>
+            <CreateProfile />
+          </PrivetRoutes>
+        ),
       },
       // {
       //   path: "/my-connection",
-      //   element: <MyConnection/>,
+      //   element: (
+      //     <PrivetRoutes>
+      //       <MyConnection />
+      //     </PrivetRoutes>
+      //   ),
       // },
-      {
-        path: "/create-profile",
-      },
     ],
   },
   {
@@ -34,7 +45,7 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        index:true,
+        index: true,
         // path: "/auth-layout/login",
         element: <Login />,
       },
