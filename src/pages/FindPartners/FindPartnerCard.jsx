@@ -1,9 +1,7 @@
-// TopPartnerCard.jsx
 import React from "react";
 import { FaStar, FaUser } from "react-icons/fa";
 import { Link } from "react-router";
-
-const PartnerCard = ({ Partner }) => {
+const FindPartnerCard = ({ Partner }) => {
   // { name:'omar faruk', subject:'math', rating:'5', imgUrl:""}
   console.log(Partner);
   const {
@@ -11,10 +9,8 @@ const PartnerCard = ({ Partner }) => {
     name,
     profileimage,
     subject,
-    rating,
     experienceLevel,
-    location,
-    patnerCount,
+    studyMode,
   } = Partner || {};
   return (
     <div className="w-xs mb-10 bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:scale-115 hover:bg-accent  transition-transform cursor-pointer">
@@ -30,23 +26,19 @@ const PartnerCard = ({ Partner }) => {
         )}
       </figure>
 
-      <h3 className="text-xl font-semibold text-gray-800 mb-1">{name}</h3>
-      <p className=" mb-2">
-        <span className="font-semibold">Subject:</span> <span>{subject}</span>
-      </p>
+      <h3 className="text-2xl font-semibold text-primary mb-1">{name}</h3>
+      <p className="text-xl mb-2">{subject}</p>
       {/* Rating */}
-      <div className="flex items-center gap-1 text-yellow-500 my-2">
-        {[...Array(5)].map((_, i) => (
-          <FaStar
-            key={i}
-            className={`${
-              i < Math.round(rating) ? "text-yellow-400" : "text-gray-300"
-            }`}
-          />
-        ))}
-        <span className="ml-1 text-gray-700 text-sm font-medium">
-          {rating.toFixed(1)}
-        </span>
+      <div className="e-full flex items-center justify-between gap-7 my-2">
+        <aside>
+          <p className="bg-green-500 py-1 px-3 rounded-3xl"> {studyMode}</p>
+        </aside>
+        <aside>
+          <p className="bg-yellow-500 py-1 px-3 rounded-3xl">
+            {" "}
+            {experienceLevel}
+          </p>
+        </aside>
       </div>
       <Link
         to={"/partner"}
@@ -58,4 +50,4 @@ const PartnerCard = ({ Partner }) => {
   );
 };
 
-export default PartnerCard;
+export default FindPartnerCard;
