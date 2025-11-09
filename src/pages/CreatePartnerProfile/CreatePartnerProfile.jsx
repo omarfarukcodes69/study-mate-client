@@ -9,24 +9,33 @@ const CreatePartnerProfile = () => {
     e.preventDefault();
     const form = e.target;
 
-  
-    //   id: Date.now().toString(),
-    //   name: form.name.value,
-    //   profileimage: form.profileimage.value,
-    //   subject: form.subject.value,
-    //   studyMode: form.studyMode.value,
-    //   availabilityTime: form.availabilityTime.value,
-    //   location: form.location.value,
-    //   experienceLevel: form.experienceLevel.value,
-    //   rating: 0,
-    //   patnerCount: 0,
-    //   email: user?.email || form.email.value,
-    //   description: form.description.value,
-    // };
+    const newPartner = {
+      id: Date.now().toString(),
+      name: form.name.value,
+      profileimage: form.profileimage.value,
+      subject: form.subject.value,
+      studyMode: form.studyMode.value,
+      availabilityTime: form.availabilityTime.value,
+      location: form.location.value,
+      experienceLevel: form.experienceLevel.value,
+      rating: 0,
+      patnerCount: 0,
+      email: user?.email || form.email.value,
+      description: form.description.value,
+    };
+    fetch("http://localhost:3000/partners", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPartner),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("afer data base ", data);
+      });
 
-    // console.log("Profile Created:", profileData);
+    console.log("Profile Created:", newPartner);
     toast.success("Profile created successfully!");
-    form.reset();
+    // form.reset();
   };
 
   return (
