@@ -34,14 +34,14 @@ const Login = () => {
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button className="btn btn-neutral mt-4">Login</button>
+                <button className="btn btn-primary mt-4">Login</button>
               </fieldset>
             </form>
             {/* ...... resiter page link .....  */}
             <div className="text-accent text-center my-2">
               Don't h Have an account ?{" "}
               <span>
-                <Link to="/authLayuot/register" className="text-red-500">
+                <Link to={"/auth-layout/register"} className="text-red-500">
                   Resigser
                 </Link>
               </span>
@@ -50,7 +50,7 @@ const Login = () => {
             <div className=" space-y-2">
               <button
                 onClick={handleGoogleLogIn}
-                className="btn  btn-primary w-full p-4"
+                className="btn  btn-secondary w-full p-4"
               >
                 <FcGoogle className="text-2xl" /> Log In With Google
               </button>
