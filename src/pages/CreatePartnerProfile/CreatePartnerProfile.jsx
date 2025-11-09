@@ -29,13 +29,14 @@ const CreatePartnerProfile = () => {
       body: JSON.stringify(newPartner),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log("afer data base ", data);
+      .then(() => {
+        // console.log("afer data base ", data);
+        toast.success("Profile created successfully!");
       });
 
-    console.log("Profile Created:", newPartner);
-    toast.success("Profile created successfully!");
-    // form.reset();
+    // console.log("Profile Created:", newPartner);
+
+    form.reset();
   };
 
   return (

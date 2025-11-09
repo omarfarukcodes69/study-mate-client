@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroBanner from "./HeroBannar";
 import PartnerCard from "../../components/PartnerCard";
 import HowItWorks from "./HowItWorks";
 import Review from "./Review";
 import { Link } from "react-router";
-import {FaArrowAltCircleRight } from "react-icons/fa";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const Home = () => {
+  const [topPartners, setTopPartners] = useState([]);
+  console.log(topPartners);
+
+  // === load top Partner Data ===
+  useEffect(() => {
+    fetch("http://localhost:3000/topPartners")
+      .then((res) => res.json())
+      .then((data) => {
+        setTopPartners(data);
+        // console.log("Top Partner form data ", data);
+      });
+  }, []);
   return (
     <div>
-
       <header>
         <HeroBanner />
       </header>
@@ -20,16 +31,16 @@ const Home = () => {
             Top Study Partners
           </h1>
           <div className="w-9/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 items-center">
-            <PartnerCard />
-            <PartnerCard />
-            <PartnerCard />
+            {topPartners.map((topPartner) => (
+              <PartnerCard key={topPartner._id} Partner={topPartner} />
+            ))}
           </div>
           <div className=" w-full  text-center mx-auto ">
             <Link
               to={"/find-partners"}
               className="  btn btn-outline border-2 border-primary text-lg "
             >
-              Show All <FaArrowAltCircleRight/>
+              Show All <FaArrowAltCircleRight />
             </Link>
           </div>
         </section>
