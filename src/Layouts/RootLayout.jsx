@@ -11,7 +11,7 @@ const RootLayout = () => {
                 <Navbar/>
             </nav>
         </header>
-        <main className='flex flex-col min-h-screen'>
+        <main className='flex flex-col min-h-screen w-11/12 mx-auto'>
             <Outlet/>
         </main>
         <footer>
