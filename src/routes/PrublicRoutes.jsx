@@ -17,9 +17,13 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/find-partner",
-        element: <FindParters />,
+        path: "/find-partners",
+        element: <FindParters/>,
       },
+      // {
+      //   path: "/my-connection",
+      //   element: <MyConnection/>,
+      // },
       {
         path: "/create-profile",
       },
