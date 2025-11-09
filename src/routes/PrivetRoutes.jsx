@@ -12,7 +12,7 @@ const PrivetRoutes = ({ children }) => {
   if (user && user?.email) {
     return children;
   }
-  return <Navigate state={location.pathname} to={"/auth"}></Navigate>;
+  return <Navigate state={location.pathname} to={"/auth-layout"}></Navigate>;
 };
 
 export default PrivetRoutes;

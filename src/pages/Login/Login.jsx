@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { user, logInUser } = use(AuthContext);
+  const { user, logInUser, logInWithGoogle } = use(AuthContext);
   // console.log(user)
   const nevigate =useNavigate()
   const hangleLogIn = (e) => {
@@ -26,7 +26,19 @@ const Login = () => {
         toast(error.code, error.message);
       });
   };
-  const handleGoogleLogIn = () => {};
+  const handleGoogleLogIn = () => {
+     logInWithGoogle()
+    .then((userInfo) => {
+        const user = userInfo.user;
+        nevigate(`${location.state ? location.state : "/"}`);
+        // console.log(user);
+        toast(`Log In Successfully !!! ${user?.displayName} Sir`);
+      })
+      .catch((error) => {
+        // console.log(error.massage);
+        toast(error.code, error.message);
+      });
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">

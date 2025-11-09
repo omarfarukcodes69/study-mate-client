@@ -6,9 +6,10 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivetRoutes from "./PrivetRoutes";
-import CreateProfile from "../pages/CreateProfile/CreateProfile";
+import CreateProfile from "../pages/CreatePartnerProfile/CreatePartnerProfile";
 import Profile from "../pages/Home/Profile";
 import PartnerDetails from "../components/PartnerDetails";
+import CreatePartnerProfile from "../pages/CreatePartnerProfile/CreatePartnerProfile";
 
 const router = createBrowserRouter([
   {
@@ -24,14 +25,6 @@ const router = createBrowserRouter([
         path: "/find-partners",
         element: <FindParters />,
       },
-      {
-        path: "/create-profile",
-        element: (
-          <PrivetRoutes>
-            <CreateProfile />
-          </PrivetRoutes>
-        ),
-      },
       // {
       //   path: "/my-connection",
       //   element: (
@@ -42,7 +35,15 @@ const router = createBrowserRouter([
       // },
       {
         path: "/partner",
-        element: <PartnerDetails />,
+        element: (
+          <PrivetRoutes>
+            <PartnerDetails />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/Create-Partner-Profile",
+        element: <CreatePartnerProfile />,
       },
       {
         path: "/profile",

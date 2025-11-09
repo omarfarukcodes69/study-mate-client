@@ -34,7 +34,7 @@ const Navbar = () => {
         <>
           <li>
             <NavLink
-              to="/create-profile"
+              to={"/Create-Partner-Profile"}
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"
               }
