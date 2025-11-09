@@ -18,11 +18,11 @@ body {
   default: true;
   --color-base-100: #FFFFFF;
   --color-base-200: #E9E9E9;
-  --color-base-300: #001931;
+  --color-base-300: #ddd3ec;
   --color-base-content: oklch(20% 0.05 240);
   --color-primary: #3b82f6;
-  --color-primary-content: #632EE3;
   --color-secondary: #60a5fa;
+  --color-primary-content: #632EE3;
   --color-textColor:#632EE3;
   --color-accent: #627382;
 }
