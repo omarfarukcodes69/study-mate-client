@@ -1,9 +1,21 @@
 import React from 'react';
+import Navber from '../components/Navber';
+import { Outlet } from 'react-router';
+import Footer from '../components/Footer';
 
 const RootLayout = () => {
     return (
         <div>
-            hello world rood layout
+
+            <header>
+                <Navber/>
+            </header>
+            <main>
+                <Outlet/>
+            </main>
+            <footer>
+                <Footer/>
+            </footer>
         </div>
     );
 };
