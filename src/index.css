@@ -2,10 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: light --defualt;
 }
-body{
+
+body {
   background-color: #E9E9E9;
   font-family: "Poppins", sans-serif;
   font-style: normal;
@@ -18,8 +20,10 @@ body{
   --color-base-200: #E9E9E9;
   --color-base-300: #001931;
   --color-base-content: oklch(20% 0.05 240);
-  --color-primary: blue;
-  --color-secondary: oklch(70% 0.25 200);
+  --color-primary: #3b82f6;
+  --color-primary-content: #632EE3;
+  --color-secondary: #60a5fa;
+  --color-textColor:#632EE3;
   --color-accent: #627382;
 }
 
@@ -27,6 +31,7 @@ body{
 .btn-primary {
   @apply bg-gradient-to-r from-[#632EE3] to-[#9f62f2] text-white
 }
+
 .btn-primary:hover {
   @apply opacity-90
 }

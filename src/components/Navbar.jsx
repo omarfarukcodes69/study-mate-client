@@ -1,5 +1,4 @@
 import React from "react";
-import bgLogo from "../assets/bg-logo.jpg";
 import Logo from "../assets/justlogo.png";
 import { Link, NavLink } from "react-router";
 
@@ -8,6 +7,7 @@ const Navbar = () => {
     name: "omar",
     email: "hdfjhf",
   };
+  // ===my Navlinks ===
   const Links = (
     <>
       <li>
@@ -87,7 +87,9 @@ const Navbar = () => {
         </div>
         <div className="btn btn-ghost text-xl">
             <img className=" w-10 h-10" src={Logo} alt="" />
-            <h1><span className=" text-primary">Study</span> <span className="text-primary font-normal">Mate</span></h1>
+            <h1>
+              <span className=" text-primary">Study</span> <span className="text-primary font-normal">Mate</span>
+            </h1>
             </div>
       </div>
       <div className="navbar-center hidden lg:flex">
