@@ -1,7 +1,7 @@
 import React from "react";
 import footerLogo from "../assets/logo.png";
 import { Link, NavLink } from "react-router";
-import { FaFacebook, FaGithub } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
@@ -82,15 +82,21 @@ const Footer = () => {
       {/* ==social=== */}
       <aside>
         <h6 className="footer-title">Social</h6>
-        <div className="grid grid-flow-col gap-4 justify-center items-center text-2xl">
-          <Link>
+        <div className="flex gap-4 justify-center items-center text-2xl bg-base-200 p-2 rounded-full">
+          <Link className=" hover:text-secondary hover:scale-150 transform-3d translate ">
             <FaFacebook />
           </Link>
-          <Link>
+          <Link className=" hover:text-secondary hover:scale-150 transform-3d translate ">
             <FaGithub />
           </Link>
-          <Link>
+          <Link className=" hover:text-secondary hover:scale-150 transform-3d translate ">
             <FaXTwitter />
+          </Link>
+          <Link className=" hover:text-secondary hover:scale-150 transform-3d translate ">
+            <FaLinkedin />
+          </Link>
+          <Link className=" hover:text-secondary hover:scale-150 transform-3d translate ">
+            <FaInstagramSquare />
           </Link>
         </div>
         <p className="text-primary-content">
