@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import FindPartnerCard from "./FindPartnerCard";
 import { toast } from "react-toastify";
+import NotFound from "../ErrorPages/NotFound";
 
 const FindParters = () => {
   const [partners, setParners] = useState([]);
+  const [allPartners, setAllPartners] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [sortBy, setSortBy] = useState("default");
+
   useEffect(() => {
     fetch("http://localhost:3000/partners")
       .then((res) => res.json())
       .then((data) => {
         setParners(data);
+        setAllPartners(data);
       });
   }, []);
   // console.log(partners);
@@ -17,10 +22,33 @@ const FindParters = () => {
 
   // ===handleSearch===
   const handleSearch = () => {
-     const searchPartner = partners.filter((partner) =>
+    if (!searchValue.trim()) {
+      toast.info("Please enter a name to search");
+      return;
+    }
+    const searchPartner = allPartners.filter((partner) =>
       partner.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setParners(searchPartner)
+    if (searchPartner.length === 0) {
+      toast.warning("No partner found with that name");
+    }
+    setParners(searchPartner);
+  };
+
+  // ===handle sort ====
+  const handleSortChange = (e) => {
+    const sortValue = e.target.value;
+    setSortBy(sortValue);
+    let sorted = [...allPartners];
+    if (sortValue == "name") {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortValue == "experience") {
+      sorted.sort((a, b) => a.experienceLevel.localeCompare(b.experienceLevel));
+    } else {
+      // default = show original data
+      sorted = allPartners;
+    }
+    setParners(sorted);
   };
   return (
     <div>
@@ -34,7 +62,11 @@ const FindParters = () => {
       <div className="flex flex-col md:flex-row justify-between items-center mb-10">
         <div className="w-full space-x-4 mb-3 md:mb-0">
           <label className="font-semibold text-accent">Sort by:</label>
-          <select className="select select-bordered w-fit  ">
+          <select
+            className="select select-bordered w-fit "
+            value={sortBy}
+            onChange={handleSortChange}
+          >
             <option value="default">Default</option>
             <option value="name">Name</option>
             <option value="experience">Experience Level</option>
@@ -55,10 +87,16 @@ const FindParters = () => {
           </button>
         </div>
       </div>{" "}
-      <main className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
-        {partners.map((partner) => (
-          <FindPartnerCard key={partner._id} Partner={partner} />
-        ))}
+      <main>
+        {partners.length > 0 ? (
+          <section className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+            {partners.map((partner) => (
+              <FindPartnerCard key={partner._id} Partner={partner} />
+            ))}
+          </section>
+        ) : (
+          <NotFound />
+        )}
       </main>
     </div>
   );
