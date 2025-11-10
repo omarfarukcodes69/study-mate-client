@@ -2,15 +2,13 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import ConnUpdateModal from "./ConnUpdateModal";
 
 const MyConnection = () => {
   const { user } = use(AuthContext);
   const [connections, setConnections] = useState([]);
   const [editingId, setEditingId] = useState(null);
-  const [updatedInfo, setUpdatedInfo] = useState({
-    subject: "",
-    studyMode: "",
-  });
+
   // console.log(user)
   // Load all connections by user email
   useEffect(() => {
@@ -21,9 +19,9 @@ const MyConnection = () => {
         .catch(() => toast.error("Failed to load connections"));
     }
   }, [user?.email]);
-  console.log(connections);
+  //   console.log(connections);
   // Handle delete connection
-  const handleDelete = async (_id) => {
+  const handleDeletePartner = async (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -34,7 +32,7 @@ const MyConnection = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/bids/${_id}`, {
+        fetch(`http://localhost:3000/connections/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -42,11 +40,11 @@ const MyConnection = () => {
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
-                text: "Your file has been deleted.",
+                text: "Your Partner has been deleted.",
                 icon: "success",
               });
               //   Optionally update UI:
-            //   setConnections((prev) => prev.filter((bid) => bid._id !== _id));
+              setConnections((prev) => prev.filter((conn) => conn._id !== _id));
             } else {
               toast.error("Delete failed — no matching bid found!");
             }
@@ -74,33 +72,19 @@ const MyConnection = () => {
     //   toast.error("Failed to delete connection.");
     // }
   };
-
+//   console.log(editingId);
   //  Handle update connectors
-  const handleUpdate = async (id) => {
-    const res = await fetch(`http://localhost:3000/my-connections/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedInfo),
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      toast.success("Connection updated successfully!");
-      setEditingId(null);
-      // reload data
-      fetch(`http://localhost:3000/my-connections?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setConnections(data));
-    } else {
-      toast.error("Update failed!");
-    }
+  const handleUpdateConn = (id) => {
+    setEditingId(id);
+    document.getElementById("my_modal_5").showModal();
   };
 
   return (
     <div className="container mx-auto ">
-      <h1 className="text-3xl text-base-200 bg-primary w-fit mx-auto p-4  font-bold text-center rounded-b-2xl shadow-xl">
-        Create Partner Profile
+      <h1 className="text-3xl text-base-200 bg-primary w-fit mx-auto p-4 font-bold text-center rounded-b-2xl shadow-xl">
+        My Connections
       </h1>
+
       <span className="divider"></span>
 
       {connections.length === 0 ? (
@@ -136,75 +120,22 @@ const MyConnection = () => {
                   <td>
                     <button
                       className="btn btn-success btn-sm mr-2"
-                      onClick={() => handleUpdate(conn._id)}
+                      onClick={() => handleUpdateConn(conn._id)}
                     >
                       Update
                     </button>
+                    {/* ==delete btn === */}
                     <button
                       className="btn btn-error btn-sm"
-                      onClick={() => setEditingId(null)}
+                      onClick={() => handleDeletePartner(conn._id)}
                     >
                       Delete
                     </button>
                   </td>
-                  {/* Update Mode */}
-                  {/* {editingId === conn._id ? (
-                    <>
-                      <td>
-                        <input
-                          type="text"
-                          value={updatedInfo.subject}
-                          onChange={(e) =>
-                            setUpdatedInfo({
-                              ...updatedInfo,
-                              subject: e.target.value,
-                            })
-                          }
-                          className="input input-bordered input-sm"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={updatedInfo.studyMode}
-                          onChange={(e) =>
-                            setUpdatedInfo({
-                              ...updatedInfo,
-                              studyMode: e.target.value,
-                            })
-                          }
-                          className="input input-bordered input-sm"
-                        />
-                      </td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{conn.subject}</td>
-                      <td>{conn.studyMode}</td>
-                      <td>
-                        <button
-                          className="btn btn-warning btn-sm mr-2"
-                          onClick={() => {
-                            setEditingId(conn._id);
-                            setUpdatedInfo({
-                              subject: conn.subject,
-                              studyMode: conn.studyMode,
-                            });
-                          }}
-                        >
-                          Update
-                        </button>
-                        <button
-                          className="btn btn-error btn-sm"
-                          onClick={() => handleDelete(conn._id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </>
-                  )} */}
                 </tr>
               ))}
+              {/* === update modal === */}
+              <ConnUpdateModal id={editingId} />
             </tbody>
           </table>
         </div>
