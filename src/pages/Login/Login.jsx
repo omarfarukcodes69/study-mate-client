@@ -1,13 +1,14 @@
 import { use } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { user, logInUser, logInWithGoogle } = use(AuthContext);
+  const { setUser, logInUser, logInWithGoogle } = use(AuthContext);
   // console.log(user)
-  const nevigate =useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
   const hangleLogIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,9 +16,9 @@ const Login = () => {
     const password = form.password.value;
     // console.log(email, password);
     logInUser(email, password)
-    .then((UserContainer) => {
+      .then((UserContainer) => {
         const user = UserContainer.user;
-        nevigate(`${location.state ? location.state : "/"}`);
+        navigate(`${location.state ? location.state : "/"}`);
         // console.log(user);
         toast(`Log In Successfully !!! ${user?.displayName}`);
       })
@@ -27,11 +28,12 @@ const Login = () => {
       });
   };
   const handleGoogleLogIn = () => {
-     logInWithGoogle()
-    .then((userInfo) => {
+    logInWithGoogle()
+      .then((userInfo) => {
         const user = userInfo.user;
-        nevigate(`${location.state ? location.state : "/"}`);
-        // console.log(user);
+        // setUser(user);
+        navigate(`${location.state ? location.state : "/"}`);
+        console.log(user);
         toast(`Log In Successfully !!! ${user?.displayName} Sir`);
       })
       .catch((error) => {

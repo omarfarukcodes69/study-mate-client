@@ -8,8 +8,9 @@ import Register from "../pages/Register/Register";
 import PrivetRoutes from "./PrivetRoutes";
 import CreateProfile from "../pages/CreatePartnerProfile/CreatePartnerProfile";
 import Profile from "../pages/Home/Profile";
-import PartnerDetails from "../components/PartnerDetails";
+import PartnerDetails from "../pages/PartnerDetails/PartnerDetails";
 import CreatePartnerProfile from "../pages/CreatePartnerProfile/CreatePartnerProfile";
+import MyConnection from "../pages/MyConnections/MyConnection";
 
 const router = createBrowserRouter([
   {
@@ -25,16 +26,16 @@ const router = createBrowserRouter([
         path: "/find-partners",
         element: <FindParters />,
       },
-      // {
-      //   path: "/my-connection",
-      //   element: (
-      //     <PrivetRoutes>
-      //       <MyConnection />
-      //     </PrivetRoutes>
-      //   ),
-      // },
       {
-        path: "/partner",
+        path: "/my-connection",
+        element: (
+          <PrivetRoutes>
+            <MyConnection />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/partner-details/:id",
         element: (
           <PrivetRoutes>
             <PartnerDetails />
@@ -43,15 +44,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/Create-Partner-Profile",
-        element: <CreatePartnerProfile />,
+        element: (
+          <PrivetRoutes>
+            <CreatePartnerProfile />
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/profile",
-        element: (
-          <PrivetRoutes>
-            <Profile />
-          </PrivetRoutes>
-        ),
+        element: <Profile />,
       },
     ],
   },

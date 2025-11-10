@@ -18,7 +18,7 @@ const FindParters = () => {
       });
   }, []);
   // console.log(partners);
-  console.log(searchValue);
+  // console.log(searchValue);
 
   // ===handleSearch===
   const handleSearch = () => {
@@ -34,7 +34,6 @@ const FindParters = () => {
     }
     setParners(searchPartner);
   };
-
   // ===handle sort ====
   const handleSortChange = (e) => {
     const sortValue = e.target.value;
@@ -52,8 +51,8 @@ const FindParters = () => {
   };
   return (
     <div>
-      <div className="">
-        <h1 className="text-3xl text-primary text-center font-bold">
+      <div>
+        <h1 className="text-3xl text-primary text-center font-bold mt-5">
           Find Your Partner
         </h1>
       </div>

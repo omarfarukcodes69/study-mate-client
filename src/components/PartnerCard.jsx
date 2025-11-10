@@ -6,16 +6,7 @@ import { Link } from "react-router";
 const PartnerCard = ({ Partner }) => {
   // { name:'omar faruk', subject:'math', rating:'5', imgUrl:""}
   console.log(Partner);
-  const {
-    _id,
-    name,
-    profileimage,
-    subject,
-    rating,
-    experienceLevel,
-    location,
-    patnerCount,
-  } = Partner || {};
+  const { _id, name, profileimage, subject, rating } = Partner || {};
   return (
     <div className="w-xs mb-10 bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:scale-115 hover:bg-accent  transition-transform cursor-pointer">
       <figure>
@@ -49,7 +40,7 @@ const PartnerCard = ({ Partner }) => {
         </span>
       </div>
       <Link
-        to={"/partner"}
+        to={`/partner-details/${_id}`}
         className="mt-4 btn btn-primary hover:btn-primary text-white rounded-md font-semibold transition"
       >
         View Profile

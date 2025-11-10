@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
   /// -----remaber user
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
       setUser(currentUser);
       setLoading(false);
     });

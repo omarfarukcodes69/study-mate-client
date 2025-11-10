@@ -44,7 +44,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/my-connections"
+              to="/my-connection"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-500"
               }

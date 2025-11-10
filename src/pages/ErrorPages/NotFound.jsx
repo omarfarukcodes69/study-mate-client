@@ -9,7 +9,8 @@ const NotFound = () => {
       </h2>
       <p className="text-accent mb-6 max-w-md">
         We couldn’t find any study partners matching your search or filter.
-        Please refresh the page and try adjusting your search terms or reset the filters.
+        Please refresh the page and try adjusting your search terms or reset the
+        filters.
       </p>
     </div>
   );
