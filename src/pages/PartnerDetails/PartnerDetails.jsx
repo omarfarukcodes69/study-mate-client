@@ -9,11 +9,10 @@ import { AuthContext } from "../../context/AuthContext/AuthContext";
 const PartnerDetails = () => {
   const { user } = use(AuthContext);
   const [partnerInfo, setPartnerInfo] = useState([]);
-  //  const [patnersCount, setPatnersCount] = useState(patnerCount);
   const [partnersCount, setPartnersCount] = useState(0);
+  const [btnDisable, setBtnDisable] = useState(false);
   const params = useParams();
   const id = params.id;
-
   useEffect(() => {
     fetch(`http://localhost:3000/partner/${id}`)
       .then((res) => res.json())
@@ -39,11 +38,36 @@ const PartnerDetails = () => {
     profileimage,
   } = partnerInfo;
   // console.log(partnersCount);
-  // console.log(name,email)
+  // console.log({name,email,id,_id})
+  useEffect(() => {
+    if (!user) return;
+    fetch(
+      `http://localhost:3000/connections/check-request?userEmail=${user.email}&partnerId=${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data); // { exists: true } বা { exists: false }
+        if (data.exists) setBtnDisable(true);
+      })
+      .catch((err) => toast.error("Failed to load connections"));
+  }, [user, id]);
+
+  // ==== get connection data ====
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/my-connections/${id}`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch(() => toast.error("Failed to load connections"));
+  // }, [id]);
 
   // ==== dend requested ===
-  const handleSendRequest = () => {
+  const handleSendRequest = async () => {
     if (!user) return toast.error("You must be logged in to send a request");
+    setBtnDisable(true);
     // Increment partner count
     const newCount = partnersCount + 1;
     setPartnersCount(newCount);
@@ -61,36 +85,28 @@ const PartnerDetails = () => {
     };
     // const newProductCount= partnersCount
     // === update partnerCount Added in backend ======
-    fetch(`http://localhost:3000/partners/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ patnerCount: newCount }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        // Optionally handle errors if your backend returns a success flag
-        if (!data.success) {
-          toast.error("Failed to update partner count");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error("Failed to update partner count");
+    try {
+      // Update partner count
+      await fetch(`http://localhost:3000/partners/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ patnerCount: newCount }),
       });
 
-    // ===== new collection added ====
-    fetch("http://localhost:3000/connections/sent-request", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestData),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        // console.log("afer data base ", data);
-        toast.success("Partner request sent successfully!");
+      // Send partner request
+      await fetch("http://localhost:3000/connections/sent-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData),
       });
-    console.log("Sending partner request:", requestData);
+
+      toast.success("Partner request sent successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send partner request");
+      setPartnersCount(partnersCount);
+      setBtnDisable(false);
+    }
   };
 
   return (
@@ -145,7 +161,10 @@ const PartnerDetails = () => {
       <div className="flex justify-end">
         <button
           onClick={handleSendRequest}
-          className="btn btn-primary hover:btn-primary"
+          disabled={btnDisable}
+          className={`btn btn-primary hover:btn-primary ${
+            btnDisable ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700"
+          }`}
         >
           Send Partner Request
         </button>

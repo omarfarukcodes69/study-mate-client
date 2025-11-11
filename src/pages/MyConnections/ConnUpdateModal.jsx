@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const ConnUpdateModal = ({ editingData, onUpdated }) => {
   const { id, subject, studyMode } = editingData;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +15,7 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
       partnerStudyMode: studyMode,
     };
     console.log(updatePartner);
+    // === update partners =====
     fetch(`http://localhost:3000/connections/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -65,7 +68,9 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
               />
             </div>
             <div className="modal-action">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit"
+              className="btn btn-primary"
+              >
                 Update
               </button>
               <button
