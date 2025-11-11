@@ -19,7 +19,7 @@ const PartnerDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setPartnerInfo(data);
-        setPartnersCount(data.patnerCount);
+        setPartnersCount(data.patnerCount || 0);
         // console.log(data);
       })
       .catch((error) => toast.error(error));
@@ -36,7 +36,6 @@ const PartnerDetails = () => {
     studyMode,
     location,
     experienceLevel,
-    patnerCount,
     profileimage,
   } = partnerInfo;
   // console.log(partnersCount);
@@ -44,8 +43,10 @@ const PartnerDetails = () => {
 
   // ==== dend requested ===
   const handleSendRequest = () => {
+    if (!user) return toast.error("You must be logged in to send a request");
     // Increment partner count
-    setPartnersCount((prev) => prev + 1);
+    const newCount = partnersCount + 1;
+    setPartnersCount(newCount);
     // Simulate saving data to "requests" collection
     const requestData = {
       partnerId: _id,
@@ -58,6 +59,27 @@ const PartnerDetails = () => {
       userEmail: user.email,
       date: new Date().toISOString(),
     };
+    // const newProductCount= partnersCount
+    // === update partnerCount Added in backend ======
+    fetch(`http://localhost:3000/partners/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ patnerCount: newCount }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // Optionally handle errors if your backend returns a success flag
+        if (!data.success) {
+          toast.error("Failed to update partner count");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Failed to update partner count");
+      });
+
+    // ===== new collection added ====
     fetch("http://localhost:3000/connections/sent-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -116,7 +138,7 @@ const PartnerDetails = () => {
         </div>
         <div>
           <strong className="text-lg text-primary">Partner Count:</strong>{" "}
-          <span className="text-lg text-secondary"> {patnerCount}</span>
+          <span className="text-lg text-secondary"> {partnersCount}</span>
         </div>
       </div>
       <span className="divider"></span>

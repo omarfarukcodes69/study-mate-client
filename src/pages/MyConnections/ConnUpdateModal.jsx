@@ -21,6 +21,7 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
       .then((res) => res.json())
       .then(() => {
         toast.success("Updated Successfully!");
+        form.reset();
         document.getElementById("my_modal_5").close();
         if (onUpdated) onUpdated();
       })
