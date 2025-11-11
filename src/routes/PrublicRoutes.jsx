@@ -11,6 +11,7 @@ import Profile from "../pages/Home/Profile";
 import PartnerDetails from "../pages/PartnerDetails/PartnerDetails";
 import CreatePartnerProfile from "../pages/CreatePartnerProfile/CreatePartnerProfile";
 import MyConnection from "../pages/MyConnections/MyConnection";
+import Error404 from "../pages/ErrorPages/error404";
 
 const router = createBrowserRouter([
   {
@@ -71,5 +72,9 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:'/*',
+    element:<Error404/>
+  }
 ]);
 export default router;
