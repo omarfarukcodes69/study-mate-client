@@ -46,23 +46,11 @@ const PartnerDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data); // { exists: true } বা { exists: false }
+        console.log(data);
         if (data.exists) setBtnDisable(true);
       })
-      .catch((err) => toast.error("Failed to load connections"));
+      .catch(() => toast.error("Failed to load connections"));
   }, [user, id]);
-
-  // ==== get connection data ====
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/my-connections/${id}`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch(() => toast.error("Failed to load connections"));
-  // }, [id]);
 
   // ==== dend requested ===
   const handleSendRequest = async () => {

@@ -3,6 +3,7 @@ import Logo from "../assets/justlogo.png";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import User from "./User";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user } = use(AuthContext);
@@ -95,14 +96,17 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
-      <div className="navbar-end">
-        {user ? (
-          <User />
-        ) : (
-          <Link to={"/auth-layout"} className="btn btn-primary">
-            Login
-          </Link>
-        )}
+      <div className="navbar-end flex items-center gap-6">
+        <ThemeToggle/>
+        <div>
+          {user ? (
+            <User />
+          ) : (
+            <Link to={"/auth-layout"} className="btn btn-primary">
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
