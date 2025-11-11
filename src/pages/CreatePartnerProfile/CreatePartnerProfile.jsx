@@ -23,7 +23,7 @@ const CreatePartnerProfile = () => {
       email: user?.email || form.email.value,
       description: form.description.value,
     };
-    fetch("http://localhost:3000/partners", {
+    fetch("https://study-mate-server-sigma.vercel.app/partners", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPartner),

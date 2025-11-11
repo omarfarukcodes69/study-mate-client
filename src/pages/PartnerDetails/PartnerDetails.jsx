@@ -14,7 +14,7 @@ const PartnerDetails = () => {
   const params = useParams();
   const id = params.id;
   useEffect(() => {
-    fetch(`http://localhost:3000/partner/${id}`)
+    fetch(`https://study-mate-server-sigma.vercel.app/partner/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setPartnerInfo(data);
@@ -42,7 +42,7 @@ const PartnerDetails = () => {
   useEffect(() => {
     if (!user) return;
     fetch(
-      `http://localhost:3000/connections/check-request?userEmail=${user.email}&partnerId=${id}`
+      `https://study-mate-server-sigma.vercel.app/connections/check-request?userEmail=${user.email}&partnerId=${id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -75,18 +75,21 @@ const PartnerDetails = () => {
     // === update partnerCount Added in backend ======
     try {
       // Update partner count
-      await fetch(`http://localhost:3000/partners/${id}`, {
+      await fetch(`https://study-mate-server-sigma.vercel.app/partners/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ patnerCount: newCount }),
       });
 
       // Send partner request
-      await fetch("http://localhost:3000/connections/sent-request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData),
-      });
+      await fetch(
+        "https://study-mate-server-sigma.vercel.app/connections/sent-request",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+        }
+      );
 
       toast.success("Partner request sent successfully!");
     } catch (error) {

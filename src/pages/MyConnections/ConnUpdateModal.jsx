@@ -16,7 +16,7 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
     };
     console.log(updatePartner);
     // === update partners =====
-    fetch(`http://localhost:3000/connections/${id}`, {
+    fetch(`https://study-mate-server-sigma.vercel.app/connections/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatePartner),
@@ -68,9 +68,7 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
               />
             </div>
             <div className="modal-action">
-              <button type="submit"
-              className="btn btn-primary"
-              >
+              <button type="submit" className="btn btn-primary">
                 Update
               </button>
               <button

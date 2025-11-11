@@ -10,7 +10,7 @@ const FindParters = () => {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
-    fetch("http://localhost:3000/partners")
+    fetch("https://study-mate-server-sigma.vercel.app/partners")
       .then((res) => res.json())
       .then((data) => {
         setParners(data);

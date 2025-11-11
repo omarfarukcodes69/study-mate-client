@@ -12,7 +12,7 @@ const Home = () => {
 
   // === load top Partner Data ===
   useEffect(() => {
-    fetch("http://localhost:3000/topPartners")
+    fetch("https://study-mate-server-sigma.vercel.app/topPartners")
       .then((res) => res.json())
       .then((data) => {
         setTopPartners(data);

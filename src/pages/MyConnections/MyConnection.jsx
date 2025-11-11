@@ -12,7 +12,9 @@ const MyConnection = () => {
   // Load all connections by user email
   const fetchConnections = () => {
     if (user?.email) {
-      fetch(`http://localhost:3000/my-connections?email=${user.email}`)
+      fetch(
+        `https://study-mate-server-sigma.vercel.app/my-connections?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => setConnections(data))
         .catch(() => toast.error("Failed to load connections"));
@@ -35,7 +37,7 @@ const MyConnection = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/connections/${_id}`, {
+        fetch(`https://study-mate-server-sigma.vercel.app/connections/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

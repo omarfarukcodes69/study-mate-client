@@ -17,7 +17,7 @@ const ThemeToggle = () => {
         onChange={(e) => handleTheme(e.target.checked)}
         type="checkbox"
         defaultChecked={localStorage.getItem("theme") === "dark"}
-        className="toggle bg-primary "
+        className="toggle "
       />
     </div>
   );
