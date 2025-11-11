@@ -7,19 +7,22 @@ import ConnUpdateModal from "./ConnUpdateModal";
 const MyConnection = () => {
   const { user } = use(AuthContext);
   const [connections, setConnections] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-
+  const [editingData, setEditingData] = useState({});
   // console.log(user)
   // Load all connections by user email
-  useEffect(() => {
+  const fetchConnections = () => {
     if (user?.email) {
       fetch(`http://localhost:3000/my-connections?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setConnections(data))
         .catch(() => toast.error("Failed to load connections"));
     }
+  };
+  useEffect(() => {
+    fetchConnections();
   }, [user?.email]);
-  //   console.log(connections);
+
+  console.log(connections);
   // Handle delete connection
   const handleDeletePartner = async (_id) => {
     Swal.fire({
@@ -52,33 +55,19 @@ const MyConnection = () => {
         // console.log("Delete Bids");
       }
     });
-
-    // console.log(bidId)
-
-    // const confirm = window.confirm(
-    //   "Are you sure you want to delete this connection?"
-    // );
-    // if (!confirm) return;
-
-    // const res = await fetch(`http://localhost:3000/my-connections/${_id}`, {
-    //   method: "DELETE",
-    // });
-    // const data = await res.json();
-
-    // if (data.success) {
-    //   setConnections(connections.filter((conn) => conn._id !== id));
-    //   toast.success("Connection deleted successfully!");
-    // } else {
-    //   toast.error("Failed to delete connection.");
-    // }
   };
-//   console.log(editingId);
+  //   console.log(editingId);
   //  Handle update connectors
-  const handleUpdateConn = (id) => {
-    setEditingId(id);
+  const handleUpdateConn = (connection) => {
+    setEditingData({
+      id: connection._id,
+      subject: connection.partnerSubject,
+      studyMode: connection.partnerStudyMode,
+    });
+    // console.log(id, subject, studyMode);
     document.getElementById("my_modal_5").showModal();
   };
-
+  // console.log(editingIData);
   return (
     <div className="container mx-auto ">
       <h1 className="text-3xl text-base-200 bg-primary w-fit mx-auto p-4 font-bold text-center rounded-b-2xl shadow-xl">
@@ -120,7 +109,7 @@ const MyConnection = () => {
                   <td>
                     <button
                       className="btn btn-success btn-sm mr-2"
-                      onClick={() => handleUpdateConn(conn._id)}
+                      onClick={() => handleUpdateConn(conn)}
                     >
                       Update
                     </button>
@@ -134,10 +123,14 @@ const MyConnection = () => {
                   </td>
                 </tr>
               ))}
-              {/* === update modal === */}
-              <ConnUpdateModal id={editingId} />
             </tbody>
           </table>
+          {/* =============================== */}
+          {/* === update modal === */}
+          <ConnUpdateModal
+            editingData={editingData}
+            onUpdated={fetchConnections}
+          />
         </div>
       )}
     </div>

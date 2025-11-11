@@ -1,49 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
-const ConnUpdateModal = ({ id }) => {
-  console.log(id);
-  //   const [subject, setSubject] = useState(connection?.partnerSubject || "");
-  //   const [studyMode, setStudyMode] = useState(
-  //     connection?.partnerStudyMode || ""
-  //   );
-  //   const { studyMode, subject } = { studyMode, subject };
-  //   useEffect(() => {
-  //     fetch(`http://localhost:3000/connections/${id}`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         // setSubject(data.partnerSubject || "");
-  //         // setStudyMode(data.partnerStudyMode || "");
-  //       })
-  //       .catch(() => toast.error("Failed to load connection data"));
-  //   }, [id]);
+const ConnUpdateModal = ({ editingData, onUpdated }) => {
+  const { id, subject, studyMode } = editingData;
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const subject = form.subject.value;
     const studyMode = form.studyMode.value;
-    console.log({ subject, studyMode });
+    // console.log({ subject, studyMode });
     const updatePartner = {
-      subject,
-      studyMode,
+      partnerSubject: subject,
+      partnerStudyMode: studyMode,
     };
-   e.preventDefault();
-    const updatePartner = { subject, studyMode };
-
+    console.log(updatePartner);
     fetch(`http://localhost:3000/connections/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatePartner),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Updated Successfully!");
         document.getElementById("my_modal_5").close();
+        if (onUpdated) onUpdated();
       })
       .catch(() => toast.error("Update failed!"));
+  };
   return (
     <div>
       {/* Open the modal using document.getElementById('my_modal_5').showModal() */}
@@ -64,7 +46,7 @@ const ConnUpdateModal = ({ id }) => {
               <input
                 type="text"
                 name="subject"
-                // value="{subject}"
+                placeholder={subject}
                 className="input input-bordered w-full text-primary"
                 required
               />
@@ -75,7 +57,7 @@ const ConnUpdateModal = ({ id }) => {
               </label>
               <input
                 type="text"
-                // value="{studyMode}"
+                placeholder={studyMode}
                 name="studyMode"
                 className="input input-bordered w-full  text-primary"
                 required
