@@ -15,7 +15,17 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log("data in res form", { name, email, photo, password });
-
+    // ==== password Validation ======
+    if (!/(?=.*[A-Z])/.test(password)) {
+      return toast.warning("Password must contain at least one uppercase letter.");
+    }
+    if (!/(?=.*[a-z])/.test(password)) {
+      return toast.warning("Password must contain at least one lowercase letter.");
+    }
+    if (password.length < 6) {
+      return toast.warning("Password must be at least 6 characters long.");
+    }
+    // ===registar ===
     createUser(email, password)
       .then((result) => {
         const user = result.user;

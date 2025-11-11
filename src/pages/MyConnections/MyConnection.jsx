@@ -73,9 +73,7 @@ const MyConnection = () => {
       <h1 className="text-3xl text-base-200 bg-primary w-fit mx-auto p-4 font-bold text-center rounded-b-2xl shadow-xl">
         My Connections
       </h1>
-
       <span className="divider"></span>
-
       {connections.length === 0 ? (
         <p className="text-center text-accent">No connections found.</p>
       ) : (
