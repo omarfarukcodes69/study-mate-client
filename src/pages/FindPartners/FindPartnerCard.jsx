@@ -7,7 +7,7 @@ const FindPartnerCard = ({ Partner }) => {
   const { _id, name, profileimage, subject, experienceLevel, studyMode } =
     Partner || {};
   return (
-    <div className="w-xs mb-10 bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:scale-115 hover:bg-accent  transition-transform cursor-pointer">
+    <div className="w-xs mb-10 bg-base-100 rounded-lg shadow-md p-6 flex flex-col items-center hover:scale-115 hover:bg-accent  transition-transform cursor-pointer">
       <figure>
         {profileimage ? (
           <img

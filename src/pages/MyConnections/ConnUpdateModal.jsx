@@ -37,7 +37,7 @@ const ConnUpdateModal = ({ editingData, onUpdated }) => {
         id="my_modal_5"
         className="modal modal-bottom sm:modal-middle border border-primary"
       >
-        <div className="modal-box bg-blue-100 p-0 borde">
+        <div className="modal-box  p-0 borde">
           <h2 className="text-xl text-base-200 bg-primary w-fit mx-auto p-4 font-bold text-center rounded-b-2xl shadow-xl">
             Update Connection
           </h2>

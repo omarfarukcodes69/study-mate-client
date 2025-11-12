@@ -81,7 +81,7 @@ const MyConnection = () => {
       ) : (
         <div className="overflow-x-auto my-10">
           <table className="table w-full ">
-            <thead className="bg-primary-content text-white">
+            <thead className="bg-primary text-white">
               <tr className="text-center">
                 <th>Profile</th>
                 <th>Partner Name</th>
@@ -94,13 +94,13 @@ const MyConnection = () => {
               {connections.map((conn) => (
                 <tr
                   key={conn._id}
-                  className="hover:bg-blue-100 hover:text-black text-xl shadow rounded-2xl m-2 text-center  "
+                  className="hover:bg-secondary hover:text-black text-xl shadow rounded-2xl m-2 text-center  "
                 >
                   <td>
                     <img
                       src={conn.partnerImg}
                       alt={conn.partnerName}
-                      className="w-12 h-12 rounded-full object-cover border-1     border-primary mx-auto"
+                      className="w-12 h-12 rounded-full object-cover border-2     border-primary mx-auto"
                     />
                   </td>
                   <td className="font-semibold">{conn.partnerName}</td>

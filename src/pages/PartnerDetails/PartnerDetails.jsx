@@ -101,7 +101,7 @@ const PartnerDetails = () => {
   };
 
   return (
-    <div className="w-4xl mx-auto border-2 border-primary p-8 bg-white rounded-lg shadow-lg my-12">
+    <div className="w-4xl mx-auto border-2 border-primary p-8 bg-base-100  rounded-lg shadow-lg my-12">
       <div className="flex items-center space-x-8">
         <img
           src={profileimage}

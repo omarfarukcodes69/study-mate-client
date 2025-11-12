@@ -66,7 +66,7 @@ const CreatePartnerProfile = () => {
 
           {/* Subject */}
           <div>
-            <label className="text-sm font-medium text-gray-600 mb-1 block">
+            <label className="text-sm font-medium text-accent mb-1 block">
               Subject
             </label>
             <input
@@ -74,7 +74,7 @@ const CreatePartnerProfile = () => {
               name="subject"
               required
               placeholder="e.g. English Literature"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
 
@@ -86,7 +86,7 @@ const CreatePartnerProfile = () => {
             <select
               name="studyMode"
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none bg-base-200"
             >
               <option value="">Select Mode</option>
               <option value="Online">Online</option>
@@ -104,7 +104,7 @@ const CreatePartnerProfile = () => {
               name="availabilityTime"
               required
               placeholder="e.g. Morning 10–1 PM"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
 
@@ -118,7 +118,7 @@ const CreatePartnerProfile = () => {
               name="location"
               required
               placeholder="e.g. Khulna, Bangladesh"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
 
@@ -130,7 +130,7 @@ const CreatePartnerProfile = () => {
             <select
               name="experienceLevel"
               required
-              className="w-full border border-accent rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 bg-base-200 focus:ring-2 focus:ring-indigo-400 outline-none"
             >
               <option value="">Select Level</option>
               <option value="Beginner">Beginner</option>
@@ -149,7 +149,7 @@ const CreatePartnerProfile = () => {
               name="profileimage"
               required
               placeholder="https://example.com/photo.jpg"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
 
@@ -164,7 +164,7 @@ const CreatePartnerProfile = () => {
               defaultValue={user?.email}
               disabled={!!user?.email}
               placeholder="Your email address"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-100 text-accent outline-none"
+              className="w-full border border-accent rounded-lg px-4 py-2 text-accent outline-none"
             />
           </div>
 
