@@ -1,16 +1,66 @@
-# React + Vite
+#  StudyMate — Find Your Perfect Study Partner
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  About the Project
+**StudyMate** is a full-stack MERN web platform designed to help students find their ideal study partners.
+The system connects learners based on subjects, study preferences, and experience levels,
+creating an interactive and goal-driven study environment.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-  **User Authentication System**
+  - Firebase authentication (Email/Password + Google Sign-in)
+  - Dynamic Navbar: different views for logged-in and logged-out users
 
-## React Compiler
+-  **Full CRUD Functionality**
+  - Create, Read, Update, and Delete study partner profiles
+  - Partner data stored securely in MongoDB via Express API
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-  **Find Partner with Search and Sort**
+  - Search by subject or location using MongoDB `$regex`
+  - Sort by experience level (Beginner → Expert)
 
-## Expanding the ESLint configuration
+- **Send Partner Request**
+  - Request to connect with other students
+  - Partner count updates automatically in MongoDB using `$inc`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-  **Modern UI + Light/Dark Theme**
+  - Built using React, Tailwind CSS, and DaisyUI
+  - Responsive layout across all screen sizes
+  - Includes theme toggle for user preference
+
+---
+
+##  Technologies Used
+
+**Frontend:** React.js, Tailwind CSS, DaisyUI, React Router, Axios, React Toastify
+**Backend:** Node.js, Express.js, MongoDB, dotenv, CORS
+**Authentication:** Firebase Authentication
+**Hosting:** Netlify (Client), Vercel (Server)
+
+##  CRUD Operation Summary
+| Operation | Page | Description |
+|------------|------|-------------|
+| **Create** | Create Partner Profile | Logged-in users can add their profile |
+| **Read** | Find Partners | View all available study partners |
+| **Update** | My Connections | Edit or update previously sent partner requests |
+| **Delete** | My Connections | Delete unwanted partner requests |
+
+
+##  Additional Features
+- Custom loading spinner for smooth user experience
+- Protected routes using PrivateRoute component
+- Toast notifications for all user actions
+- Creative 404 Not Found page
+- Firebase domain whitelisted to prevent reload issues
+
+
+##  Developer Info
+
+**Developer:** Md. Omar Faruk
+**Live Site URL:** https://studymatea10.netlify.app/
+**Server Live URL:** https://study-mate-server-sigma.vercel.app/
+**GitHub (Client):** https://github.com/omarfarukcodes69/study-mate-client
+**GitHub (Server):** https://github.com/omarfarukcodes69/study-mate-server
+
+© 2025 StudyMate | Developed with  by Md. Omar Faruk
