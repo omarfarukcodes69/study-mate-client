@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FindPartnerCard from "./FindPartnerCard";
 import { toast } from "react-toastify";
 import NotFound from "../ErrorPages/NotFound";
+import axios from "axios"; // ✅ axios import করা হয়েছে
 
 const FindParters = () => {
   const [partners, setParners] = useState([]);
@@ -10,15 +11,17 @@ const FindParters = () => {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
-    fetch("https://study-mate-server-sigma.vercel.app/partners")
-      .then((res) => res.json())
-      .then((data) => {
-        setParners(data);
-        setAllPartners(data);
+    axios
+      .get("https://study-mate-server-sigma.vercel.app/partners") // ✅ fetch এর পরিবর্তে axios.get()
+      .then((res) => {
+        setParners(res.data);
+        setAllPartners(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching partners:", err);
+        toast.error("Failed to load partners data!");
       });
   }, []);
-  // console.log(partners);
-  // console.log(searchValue);
 
   // ===handleSearch===
   const handleSearch = () => {
@@ -34,6 +37,7 @@ const FindParters = () => {
     }
     setParners(searchPartner);
   };
+
   // ===handle sort ====
   const handleSortChange = (e) => {
     const sortValue = e.target.value;
@@ -44,11 +48,11 @@ const FindParters = () => {
     } else if (sortValue == "experience") {
       sorted.sort((a, b) => a.experienceLevel.localeCompare(b.experienceLevel));
     } else {
-      // default = show original data
       sorted = allPartners;
     }
     setParners(sorted);
   };
+
   return (
     <div>
       <div>
@@ -57,6 +61,7 @@ const FindParters = () => {
         </h1>
       </div>
       <div className="divider"></div>
+
       {/* ===== Header ===== */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-10">
         <div className="w-full space-x-4 mb-3 md:mb-0">
@@ -71,6 +76,7 @@ const FindParters = () => {
             <option value="experience">Experience Level</option>
           </select>
         </div>
+
         {/* ==== search section ==== */}
         <div className="flex items-center gap-3">
           <input
@@ -85,7 +91,8 @@ const FindParters = () => {
             Search
           </button>
         </div>
-      </div>{" "}
+      </div>
+
       <main>
         {partners.length > 0 ? (
           <section className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
