@@ -30,7 +30,7 @@ const Home = () => {
           <h1 className="text-3xl text-primary font-bold text-center my-10">
             Top Study Partners
           </h1>
-          <div className="w-9/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 items-center">
+          <div className="w-full md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4space-x-4 items-center">
             {topPartners.map((topPartner) => (
               <PartnerCard key={topPartner._id} Partner={topPartner} />
             ))}

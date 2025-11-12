@@ -101,8 +101,8 @@ const PartnerDetails = () => {
   };
 
   return (
-    <div className="w-4xl mx-auto border-2 border-primary p-8 bg-base-100  rounded-lg shadow-lg my-12">
-      <div className="flex items-center space-x-8">
+    <div className=" mx-auto border-2 border-primary p-8 bg-base-100  rounded-lg shadow-lg my-12">
+      <div className=" md:flex  items-center gap-4 space-x-8">
         <img
           src={profileimage}
           alt=""
@@ -122,34 +122,38 @@ const PartnerDetails = () => {
         </div>
       </div>
       <span className="divider"></span>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
-        <div>
-          <strong className="text-lg text-primary">Subject:</strong>{" "}
-          <span className="text-lg text-secondary"> {subject}</span>
-        </div>
-        <div>
-          <strong className="text-lg text-primary">Study Mode:</strong>{" "}
-          <span className="text-lg text-secondary">{studyMode}</span>
-        </div>
-        <div>
-          <strong className="text-lg text-primary">Availability:</strong>{" "}
-          <span className="text-lg text-secondary">{availability}</span>
-        </div>
-        <div>
-          <strong className="text-lg text-primary">Location:</strong>{" "}
-          <span className="text-lg text-secondary"> {location}</span>
-        </div>
-        <div>
-          <strong className="text-lg text-primary">Experience Level:</strong>{" "}
-          <span className="text-lg text-secondary">{experienceLevel}</span>
-        </div>
-        <div>
-          <strong className="text-lg text-primary">Partner Count:</strong>{" "}
-          <span className="text-lg text-secondary"> {partnersCount}</span>
-        </div>
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center text-accent">
+        <aside>
+          <div>
+            <strong className="text-lg text-primary">Subject:</strong>{" "}
+            <span className="text-lg text-secondary"> {subject}</span>
+          </div>
+          <div>
+            <strong className="text-lg text-primary">Study Mode:</strong>{" "}
+            <span className="text-lg text-secondary">{studyMode}</span>
+          </div>
+          <div>
+            <strong className="text-lg text-primary">Availability:</strong>{" "}
+            <span className="text-lg text-secondary">{availability}</span>
+          </div>
+        </aside>
+        <aside>
+          <div>
+            <strong className="text-lg text-primary">Location:</strong>{" "}
+            <span className="text-lg text-secondary"> {location}</span>
+          </div>
+          <div>
+            <strong className="text-lg text-primary">Experience Level:</strong>{" "}
+            <span className="text-lg text-secondary">{experienceLevel}</span>
+          </div>
+          <div>
+            <strong className="text-lg text-primary">Partner Count:</strong>{" "}
+            <span className="text-lg text-secondary"> {partnersCount}</span>
+          </div>
+        </aside>
       </div>
       <span className="divider"></span>
-      <div className="flex justify-end">
+      <div className="flex justify-center">
         <button
           onClick={handleSendRequest}
           disabled={btnDisable}

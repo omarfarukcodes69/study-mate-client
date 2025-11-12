@@ -62,7 +62,7 @@ const Footer = () => {
   return (
     <footer className="footer sm:footer-horizontal bg-secondary  py-10 px-20">
       {/* === title === */}
-      <aside className="flex gap-10 items-center justify-between">
+      <aside className=" gap-10 flex-col md:flex items-center justify-between">
         <figure className="w-40 h-28 rounded-4xl bg-base-200">
           <img className="object-cover " src={footerLogo} alt="" />
         </figure>

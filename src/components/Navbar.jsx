@@ -87,9 +87,9 @@ const Navbar = () => {
         </div>
         <div className="btn btn-ghost text-xl">
           <img className=" w-10 h-10" src={Logo} alt="" />
-          <h1>
-            <span className=" text-primary">Study</span>{" "}
-            <span className="text-primary font-normal">Mate</span>
+          <h1 className=" text-primary hidden md:block">
+            <span className=" font-bold">Study </span>
+            <span className="font-semibold text-primary-content">Mate</span>
           </h1>
         </div>
       </div>
@@ -97,7 +97,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
       <div className="navbar-end flex items-center gap-6">
-        <ThemeToggle/>
+        <ThemeToggle />
         <div>
           {user ? (
             <User />
