@@ -9,10 +9,14 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-body {
-  background-color: #E9E9E9;
+* {
   font-family: "Poppins", sans-serif;
   font-style: normal;
+}
+
+body {
+  @apply bg-base-200
+  /* background-color: #E9E9E9; */
 }
 
 @plugin "daisyui/theme" {
