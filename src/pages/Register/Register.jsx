@@ -2,11 +2,16 @@ import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
-  const { createUser, setUser, updatedUserSet } = use(AuthContext);
+  const { createUser, setUser, updatedUserSet, logInWithGoogle } =
+    use(AuthContext);
+  // const { setUser, logInUser,  } = use(AuthContext);
   // const location = useLocation();
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,10 +22,14 @@ const Register = () => {
     // console.log("data in res form", { name, email, photo, password });
     // ==== password Validation ======
     if (!/(?=.*[A-Z])/.test(password)) {
-      return toast.warning("Password must contain at least one uppercase letter.");
+      return toast.warning(
+        "Password must contain at least one uppercase letter."
+      );
     }
     if (!/(?=.*[a-z])/.test(password)) {
-      return toast.warning("Password must contain at least one lowercase letter.");
+      return toast.warning(
+        "Password must contain at least one lowercase letter."
+      );
     }
     if (password.length < 6) {
       return toast.warning("Password must be at least 6 characters long.");
@@ -36,7 +45,7 @@ const Register = () => {
         })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
-            nevigate("/auth-layout");
+           navigate("/auth-layout");
           })
           .catch((error) => {
             toast(error.message);
@@ -46,6 +55,24 @@ const Register = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+      });
+  };
+
+  // =====  continoue with google ====
+  const handleGoogleLogIn = () => {
+    logInWithGoogle()
+      .then((userInfo) => {
+        const user = userInfo.user;
+        // setUser(user);
+        // navigate(location.state || "/");
+        navigate(`${location.state ? location.state : "/"}`);
+        // navigate(from, { replace: true });
+        console.log(user);
+        toast(`Log In Successfully !!! ${user?.displayName} Sir`);
+      })
+      .catch((error) => {
+        // console.log(error.massage);
+        toast(error.code, error.message);
       });
   };
   return (
@@ -104,6 +131,15 @@ const Register = () => {
                 Log In
               </Link>
             </span>
+          </div>
+          {/* ...google log In ... */}
+          <div className=" space-y-2">
+            <button
+              onClick={handleGoogleLogIn}
+              className="btn  btn-secondary w-full p-4"
+            >
+              <FcGoogle className="text-2xl" /> Log In With Google
+            </button>
           </div>
         </form>
       </div>
